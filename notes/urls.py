@@ -16,10 +16,9 @@ from . import views
 #         return render(request, 'notes/list.html')
 #     return render(request, 'notes/delete.html', {'note': note})
 urlpatterns = [
-
-    path('notes', views.list, name='list'),  
-    path('notes/<int:id>', views.detail, name='detail'),
-
+    path('notes', views.NotesListView.as_view()),
+    path('notes-popular', views.PopularNotesListView.as_view()),
+    path('notes/<int:pk>', views.NotesDetailView.as_view()),
 
 #     path('detail/<int:id>/', views.detail, name='detail'),
 #     path('create/', views.create, name='create'),
