@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartNotes List of Notes</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1>These are the notes:</h1>
-    <ul>
-        {% for note in notes_list %}
-            <li>
-                {{ note.title }}
-                <p>{{note.id}} | {{ note.content }} | {{ note.count_likes }}</p>
-            </li>
-        {% endfor %}            
-    </ul>
-</body>
+{% extends "base.html" %}
 
-</html>
+{% block content %}
+    <h1 class="my-5">These are the notes:</h1>
+
+    <div class="row row-cols3 g-2">
+        {% for note in notes_list %}
+        <div class="col">
+            <div class="p-3 border">
+              <a href="{% url 'notes.detail' pk=note.id %}" class="text-dark text-decoration-non">
+                <h3>  {{ note.title }} </h3>
+            </a>
+              {{ note.content|truncatechars:18 }}
+                <!--<p>{{note.id}} | {{ note.content }} | {{ note.count_likes }}</p> -->
+            </div>
+        </div>    
+        {% endfor %}            
+    </div>
+{% endblock %}

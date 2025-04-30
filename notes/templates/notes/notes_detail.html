@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartNotes Note Details</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1>{{note.title}}</h1>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="border round">
+    <h1 class="my-5">{{note.title}}</h1>
     <p>{{note.content}}</p>
     <p>Likes: {{note.count_likes}}</p>
-    <p>Created at: {{note.created_at}}</p>
-    <p>Updated at: {{note.updated_at}}</p>
-    <p>Id: {{note.id}}</p>    
-    <p>Author: {{note.author}}</p>
-    
-</body>
-
-</html>
+    <p class="note-li">Created at: {{note.created_at}}</p>
+    <p class="note-li">Updated at: {{note.updated_at}}</p>
+    <p class="note-li">Id: {{note.id}}</p>    
+    <p class="note-li">Author: {{note.author}}</p>
+</div>    
+{% endblock %}    
