@@ -1,11 +1,31 @@
 from django.shortcuts import render
 from django.http import Http404
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic.edit import DeleteView
 
 from .models import Notes
 from .forms import NotesForm
 
 # Create your views here.
+class NotesDeleteView(DeleteView):
+    model = Notes
+    context_object_name = "note" # need this to display the field values for the note
+    template_name = "notes/notes_delete.html"
+    success_url = '/smart/notes'  # Redirect to the notes list after deletion
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if obj.count_likes > 0:
+            raise Http404("Cannot delete a note with likes.")
+        return obj
+
+class NotesUpdateView(UpdateView):
+    model = Notes
+    # fields = ['title', 'content']
+    # template_name = 'notes/notes_update.html'
+    success_url = '/smart/notes'  # Redirect to the notes list after update
+    form_class = NotesForm  # Use the form class for validation and rendering
+
 
 class NotesCreateView(CreateView):
     model = Notes

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="'post">
+    {% csrf_token %}
+    <div class="alert alert-danger my-5">
+        <h1>Are you sure you want to delete "{{note.title}}"?</h1>
+    </div>
+    <div class="border round">    
+        <p>Id: {{note.id}}</p>
+        <p>Title: {{note.title}}</p>
+        <p>Content: {{note.content}}</p>
+        <p>Likes: {{note.count_likes}}</p>
+        <p>Created at: {{note.created_at}}</p>
+        <p>Updated at: {{note.updated_at}}</p>
+        <p>Author: {{note.author}}</p>
+        <br />
+    </div>
+    <div class="alert alert-danger my-5">
+        <h1>Warning!</h1>    
+        <p>Note: This action cannot be undone.</p>
+    </div>
+    <a href="{% url 'notes.list' %}" class="btn btn-secondary my-5">Back</a>
+
+    <input type="submit" class="btn btn-danger" value="Confirm Delete"/>
+</form>
+
+{% endblock %}
