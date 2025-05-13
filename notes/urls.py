@@ -19,6 +19,8 @@ urlpatterns = [
     path('notes', views.NotesListView.as_view(), name='notes.list'),
     path('notes-popular', views.PopularNotesListView.as_view()),
     path('notes/<int:pk>', views.NotesDetailView.as_view(), name='notes.detail'),
+    path('notes/new', views.NotesCreateView.as_view(), name='notes.new'),
+
 
 #     path('detail/<int:id>/', views.detail, name='detail'),
 #     path('create/', views.create, name='create'),

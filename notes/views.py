@@ -1,9 +1,25 @@
 from django.shortcuts import render
 from django.http import Http404
-from django.views.generic import ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView
 
 from .models import Notes
+from .forms import NotesForm
+
 # Create your views here.
+
+class NotesCreateView(CreateView):
+    model = Notes
+    # fields = ['title', 'content']
+    # template_name = 'notes/notes_create.html'
+    success_url = '/smart/notes'  # Redirect to the notes list after creation
+    form_class = NotesForm  # Use the form class for validation and rendering
+
+
+'''
+    def form_valid(self, form):
+        # You can add custom logic here if needed
+        return super().form_valid(form)
+'''
 
 class PopularNotesListView(ListView):
     model = Notes
